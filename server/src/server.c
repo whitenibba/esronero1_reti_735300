@@ -12,7 +12,7 @@
 #define closesocket close
 #endif
 
-#include "calculator.h"
+#include "header.h"
 #include <stdio.h>
 #include <ctype.h>
 
@@ -45,7 +45,7 @@ int main() {
         perror("Error creating socket");
         closesocket(server_socket);
         winsock_cleaner();
-        exit(EXIT_FAILURE);
+        _exit(0);
     }
 
     // Set up server address struct
@@ -58,7 +58,7 @@ int main() {
         perror("Error binding socket");
         closesocket(server_socket);
         winsock_cleaner();
-        exit(EXIT_FAILURE);
+        _exit(0);
     }
 
     // Listen for incoming connections
@@ -66,7 +66,7 @@ int main() {
         perror("Error listening for connections");
         closesocket(server_socket);
         winsock_cleaner();
-        exit(EXIT_FAILURE);
+        _exit(0);
     }
 
     printf("Server listening on port %d...\n", DEFAULT_PORT);
@@ -77,7 +77,7 @@ int main() {
             perror("Error accepting connection");
             closesocket(client_socket);
             winsock_cleaner();
-            exit(EXIT_FAILURE);
+            _exit(0);
         }
 
         // Print connection details
@@ -142,7 +142,7 @@ void handle_client(int client_socket) {
 			perror("Error sending data to client");
 			closesocket(client_socket);
 			winsock_cleaner();
-			exit(EXIT_FAILURE);
+			_exit(0);
 		}
 		memset(buffer, 0, BUFFER_SIZE);
 
