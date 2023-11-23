@@ -12,7 +12,7 @@
 #endif
 
 #include <stdio.h>
-#include "calculator.h"
+#include "header.h"
 
 #define DEFAULT_IP "127.0.0.1"
 #define DEFAULT_PORT 12345
@@ -43,7 +43,7 @@ int main() {
     	closesocket(client_socket);
     	winsock_cleaner();
         perror("Error creating socket");
-        exit(EXIT_FAILURE);
+        _exit(0);
     }
 
     // Set up server address struct
@@ -56,7 +56,7 @@ int main() {
     	closesocket(client_socket);
     	winsock_cleaner();
     	perror("Error connecting to server");
-        exit(EXIT_FAILURE);
+        _exit(0);
     }
 
     // Send and receive data
@@ -75,7 +75,7 @@ int main() {
         	closesocket(client_socket);
         	winsock_cleaner();
         	perror("Error sending data to server");
-            exit(EXIT_FAILURE);
+            _exit(0);
         }
         memset(buffer, 0, BUFFER_SIZE);
 
@@ -84,7 +84,7 @@ int main() {
         	closesocket(client_socket);
         	winsock_cleaner();
             perror("Error receiving data from server");
-            exit(EXIT_FAILURE);
+            _exit(0);
         }
 
         // Parse and print result
